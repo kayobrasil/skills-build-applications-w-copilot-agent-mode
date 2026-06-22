@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import usersRouter from './routes/users';
 import teamsRouter from './routes/teams';
@@ -14,6 +15,12 @@ const API_URL = isCodespace
   ? `https://${process.env.CODESPACE_NAME}-8000.app.github.dev`
   : `http://localhost:${PORT}`;
 
+app.use(cors({
+  origin: (origin, callback) => {
+    callback(null, true);
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 app.get('/health', (_req, res) => {
