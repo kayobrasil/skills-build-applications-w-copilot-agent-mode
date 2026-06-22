@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { safeApiUrl } from '../utils/api';
 
 export default function Users() {
-  const [users, setUsers] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const url = safeApiUrl('/api/users');

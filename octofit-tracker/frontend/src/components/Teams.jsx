@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { safeApiUrl } from '../utils/api';
 
 export default function Teams() {
-  const [teams, setTeams] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [teams, setTeams] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const url = safeApiUrl('/api/teams');

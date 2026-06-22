@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { safeApiUrl } from '../utils/api';
 
 export default function Workouts() {
-  const [workouts, setWorkouts] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [workouts, setWorkouts] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const url = safeApiUrl('/api/workouts');

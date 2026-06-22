@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { safeApiUrl } from '../utils/api';
 
 export default function Leaderboard() {
-  const [leaderboard, setLeaderboard] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const url = safeApiUrl('/api/leaderboard');
