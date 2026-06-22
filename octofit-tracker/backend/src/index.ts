@@ -1,10 +1,10 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import usersRouter from './routes/users';
 import teamsRouter from './routes/teams';
 import activitiesRouter from './routes/activities';
 import leaderboardRouter from './routes/leaderboard';
 import workoutsRouter from './routes/workouts';
+import connectDatabase, { MONGO_URI } from './config/database';
 
 const app = express();
 const PORT = 8000;
@@ -13,7 +13,6 @@ const isCodespace = Boolean(process.env.CODESPACE_NAME);
 const API_URL = isCodespace
   ? `https://${process.env.CODESPACE_NAME}-8000.githubpreview.dev`
   : `http://localhost:${PORT}`;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db';
 
 app.use(express.json());
 
@@ -34,9 +33,10 @@ app.use('/api/workouts', workoutsRouter);
 app.listen(PORT, HOST, async () => {
   console.log(`Backend listening on http://${HOST}:${PORT}`);
   console.log(`API URL: ${API_URL}`);
+  console.log(`MongoDB URI: ${MONGO_URI}`);
 
   try {
-    await mongoose.connect(MONGO_URI, { dbName: 'octofit-tracker' });
+    await connectDatabase();
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('MongoDB connection failed:', error);

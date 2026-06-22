@@ -4,14 +4,14 @@ import Team from '../models/team';
 import Activity from '../models/activity';
 import Workout from '../models/workout';
 import Leaderboard from '../models/leaderboard';
+import connectDatabase, { MONGO_URI } from '../config/database';
 
 // Seed the octofit_db database with test data
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db';
-
 async function seed() {
   console.log('Seed the octofit_db database with test data');
+  console.log(`Connecting to MongoDB at ${MONGO_URI}`);
 
-  await mongoose.connect(MONGO_URI, { dbName: 'octofit_db' });
+  await connectDatabase();
 
   await Promise.all([
     User.deleteMany({}),
